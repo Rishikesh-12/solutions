@@ -1,0 +1,23 @@
+two number
+--------------------------------------------------
+question link - https://leetcode.com/problems/two-sum/
+
+----------------------------
+Solution
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> map;
+        // vector<int> arr(2);
+        for (int i=0;i<nums.size();i++){
+            int compliment = target - nums[i];
+            auto it = map.find(compliment);
+            if (it != map.end()) {
+                return {it->second,i};
+            }
+            map.insert(pair<int, int>(nums[i],i));
+        }
+        return {};
+    }
+};
