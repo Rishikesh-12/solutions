@@ -1,0 +1,29 @@
+Lowest Common Ancestor
+------------------------------------------------------------------
+On gfg
+
+------------------------------------------------------------------
+
+Solution - 
+
+/*class node  
+{  
+    public: 
+    int data;  
+    node* left, *right;  
+}; */
+
+int lca(Node *root,int n1,int n2){
+    while(root!=NULL){
+        if(root->data>n1 && root->data>n2){
+            root=root->left;
+        }
+        else if(root->data<n1 && root->data<n2){
+            root=root->right;
+        }
+        else{
+            break;
+        }
+    }
+    return root;
+}
