@@ -1,0 +1,29 @@
+All permutation of a string
+------------------------------------------------------------------------
+Question Link - https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
+
+------------------------------------------------------------------------
+Solution -
+
+void swap(char *x, char *y) 
+{ 
+	char temp; 
+	temp = *x; 
+	*x = *y; 
+	*y = temp; 
+} 
+
+
+void permutation(char *ch,int l,int r){
+    int i=0;
+    if(l==r){
+        cout<<ch<<endl;
+    }
+    else{
+        for(i=l;l<=r;i++){
+            swap(ch+1,ch+i);
+            permutation(ch,l+1,r);
+            swap(ch+1,ch+i);
+        }
+    }
+}

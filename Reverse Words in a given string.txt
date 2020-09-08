@@ -1,0 +1,40 @@
+Reverse Word in a given string
+-------------------------------------------------------------------------------------
+Question Link - https://practice.geeksforgeeks.org/problems/reverse-words-in-a-given-string/0
+
+-------------------------------------------------------------------------------------
+Solution -
+
+#include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+void reverse(char a, char b){
+    char temp=a;
+    a=b;
+    b=temp;
+}
+
+string reverseWords(string s){
+    int start=0;
+    for (int end=0;end<s.length();end++){
+        if(s[end]=='.'){
+            reverse(s.begin() + start, s.begin() + end);
+            start=end+1;
+        }
+    }
+    reverse(s.begin() + start, s.end()); 
+    reverse(s.begin(),s.end());
+
+    return s;
+}
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        char s[100];
+        cin>>s;
+        cout << reverseWords(s) <<endl;
+    }
+    return 0;
+}
