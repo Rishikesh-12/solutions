@@ -1,0 +1,39 @@
+Check if string is rotated by 2 places
+--------------------------------------------------------------------------------------
+Question Link - https://practice.geeksforgeeks.org/problems/check-if-string-is-rotated-by-two-places/0
+
+--------------------------------------------------------------------------------------
+Solution -
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool checker(string a,string b){
+    if(a.length()!=b.length())
+        return false;
+        
+    string clock;
+    string anticlock;
+    int n=b.length();
+    anticlock+=b.substr(n-2,2)+b.substr(0,n-2);
+    clock+=b.substr(2,n)+b.substr(0,2);
+    
+   return (a.compare(clock) == 0 || a.compare(anticlock) == 0);
+}
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    char a[100], b[100];
+	    cin>>a;
+	    cin>>b;
+	    if(checker(a,b)){
+	        cout<<"1"<<endl;   
+	    }
+	    else{
+	        cout<<"0"<<endl;
+	    }
+	}
+	return 0;
+}
