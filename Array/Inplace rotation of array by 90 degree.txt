@@ -1,0 +1,54 @@
+Inplace rotation of array by 90 degree
+-----------------------------------------------------------------------------------
+Question Link- https://practice.geeksforgeeks.org/problems/rotate-by-90-degree/0
+
+------------------------------------------------------------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main()
+{
+	int t;
+	cin>>t; //inputting testcases
+	while(t--)
+	{
+		ll n;
+		cin>>n; //inputing n for square matrix
+		ll a[n][n],i,j;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				cin>>a[i][j]; //Inputting the matrix
+			}
+		}
+		ll x,y;
+		for(x=0;x<n/2;x++)
+		{ 
+			for(y=x;y<n-x-1;y++)
+			{
+			    /*
+			     for each square cycle, we swap the elements involved with the corresponding 
+			     cell in the matrix in anti-clockwise direction i.e. from top to left, left to bottom, 
+			     bottom to right and from right to top one at a time. 
+			     We use nothing but a temporary variable to achieve this.
+			    */
+				int temp=a[x][y];
+				a[x][y]=a[y][n-1-x];
+				a[y][n-1-x]=a[n-1-x][n-1-y];
+				a[n-1-x][n-1-y]=a[n-1-y][x];
+				a[n-1-y][x]=temp;
+			}
+		}
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				cout<<a[i][j]<<" "; //printing the resultant matrix
+			}
+		}
+		cout<<endl;
+	}
+	return 0;
+}

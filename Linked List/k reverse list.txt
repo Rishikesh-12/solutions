@@ -1,0 +1,28 @@
+K reverse list
+----------------------------------------------------------------------------------------
+Question Link - https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+----------------------------------------------------------------------------------------
+Solution - 
+
+struct node *reverse (struct node *head, int k)
+{ 
+    node *current=head;
+        node *nx=NULL;
+        node *px=NULL;
+        int count=0;
+        
+        while(current!=NULL && count < k){
+            nx=current->next;
+            current->next=px;
+            px=current;
+            current=nx;
+            count++;
+        }
+        
+        if(nx!=NULL){
+            head->next=reverse(nx,k);
+        }
+        
+        return px;
+}
