@@ -1,0 +1,23 @@
+Find a pair with the given Difference
+-----------------------------------------------------------------------------------------
+Question Link - https://practice.geeksforgeeks.org/problems/find-pair-given-difference/0
+
+-----------------------------------------------------------------------------------------
+Solution -
+bool difference(int arr[],int n,int target){
+    sort(arr,arr+n);
+    int i=0;
+    int j=1;
+    while(i<n,j<n){
+        if(i!=j && arr[j]-arr[i]==target){
+            return true;
+        }
+        else if(arr[j]-arr[i]>target){
+            i++;
+        }
+        else{
+            j++;
+        }
+    }
+    return false;
+}
