@@ -1,0 +1,34 @@
+Question - https://practice.geeksforgeeks.org/problems/ugly-numbers2254/1
+
+---------------------------------------------------------------------------
+Solution - 
+
+ull getNthUglyNo(int n) {
+	    ull ugly[n];
+	    ull i2=0;
+	    ull i3=0;
+	    ull i5=0;
+	    ull next_2 = 2;
+	    ull next_3 = 3;
+	    ull next_5 = 5;
+	    ull ugly_num = 1;
+	    
+	    ugly[0]=1;
+	    for(int i=1;i<n;i++){
+	        ugly_num = min(next_2,min(next_3,next_5));
+	        ugly[i]=ugly_num;
+	        if(ugly_num == next_2){
+	            i2++;
+	            next_2 = 2*ugly[i2];
+	        }
+	        if(ugly_num == next_3){
+	            i3++;
+	            next_3 = 3*ugly[i3];
+	        }
+	        if(ugly_num == next_5){
+	            i5++;
+	            next_5 = 5*ugly[i5];
+	        }
+	    }
+	    return ugly_num;
+	}
