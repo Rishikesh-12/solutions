@@ -1,0 +1,18 @@
+Question Link - https://practice.geeksforgeeks.org/problems/finding-middle-element-in-a-linked-list/1
+
+-----------------------------------------------------------------------------------------------------------------
+
+Question Link
+int getMiddle(Node *head)
+{
+   Node *fast=head;
+   Node *slow=head;
+   if(head!=NULL){
+        while(fast!=NULL && fast->next!=NULL){
+           slow=slow->next;
+           fast=fast->next->next;
+       }
+    return slow->data;
+   }
+   return head->data;
+}

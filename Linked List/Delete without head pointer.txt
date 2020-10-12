@@ -1,0 +1,16 @@
+Question - https://practice.geeksforgeeks.org/problems/delete-without-head-pointer/1
+
+--------------------------------------------------------------------------
+Solution 
+void deleteNode(Node *node)
+{
+    if(node==NULL){
+        return;
+    }
+    else{
+        Node *node2=node->next;
+        node->data=node2->data;
+        node->next=node2->next;
+        free(node2);
+    }
+}
