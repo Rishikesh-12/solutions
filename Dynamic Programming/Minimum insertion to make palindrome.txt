@@ -1,0 +1,44 @@
+Question Link - https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/submissions/
+
+------------------------------------------------------------------------------
+Solution
+
+int lcs(string s1,string s2,int m,int n){
+        if(m==0||n==0){
+            return 0;
+        }
+        
+        int dp[m+1][n+1];
+        
+        for(int i=0;i<=m;i++){
+            for(int j=0;j<=n;j++){
+                if(i==0||j==0){
+                    dp[i][j]=0;
+                }
+                else if(s1[i-1]==s2[j-1]){
+                        dp[i][j]=1+dp[i-1][j-1];
+                }
+                else{
+                        dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+    
+    void stringReverse(string &s3,int n){
+        for(int i=0;i<n/2;i++){
+            char temp=s3[i];
+            swap(s3[i],s3[n-1-i]);
+            s3[n-1-i]=temp;
+        }
+    }
+    
+    int minInsertions(string s) {
+        int n=s.length();
+        string rev;
+        rev = s;
+        stringReverse(rev,n);
+        cout<<rev;
+        return (n-lcs(s,rev,n,n));
+    }
