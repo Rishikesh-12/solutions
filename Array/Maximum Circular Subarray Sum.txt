@@ -1,31 +1,39 @@
-maximum-contiguous-circular-sum
---------------------------------------------------------------------------------
+Maximum-Circular-Subarry-Sum
+
 Question Link - https://www.geeksforgeeks.org/maximum-contiguous-circular-sum/
 
 --------------------------------------------------------------------------------
 Solution -
+
+#include<bits/stdc++.h>
+using namespace std;
+
 int kadane(int arr[],int n){
-    int maximumuptill,maximum;
-    maximum=maximumuptill=arr[0];
+    int currSum=arr[0];
+    int maxSum=arr[0];
     for(int i=1;i<n;i++){
-        maximumuptill=max(arr[i]+maximumuptill,arr[i]);
-        if(maximumuptill>max){
-            maximum=maximumuptill;
+        currSum=max(arr[i],currSum+arr[i]);
+        if(maxSum<currSum){
+            maxSum=currSum;
         }
     }
-    return maximum;
+    return maxSum;
 }
 
-int maximumCircularSum(int arr[],int n){
-    int max_kadane=kadane(arr,n);
-    int maxsum;
+int maximumSum(int arr[],int n){
+    int maxKadane=kadane(arr,n);
+    int totalSum=0;
     for(int i=0;i<n;i++){
-        maxsum+=arr[i];
-        arr[i]=-arr[i];
+        totalSum+=arr[i];
+        arr[i]*=-1;
     }
-    
-    maxsum=maxsum+kadane(arr,n);
-    
-    return(maxsum>max_kadane)?maxsum:max_kadane;
-    
-} 
+    int totalKadane=kadane(arr,n);
+    return max(maxKadane,totalSum+totalKadane);
+}
+
+int main(){
+    int arr[]={10, -3, -4, 7, 6, 5, -4, -1};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    cout<<maximumSum(arr,n)<<endl;
+    return 0;
+}
