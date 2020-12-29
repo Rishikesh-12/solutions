@@ -1,5 +1,5 @@
-subarray with given sum
----------------------------------------------------------
+Subarray with given sum
+
 question link - https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
 
 ------------------------------------------------------------
@@ -9,7 +9,7 @@ Solution-
 #include <bits/stdc++.h>
 using namespace std;
 
-void findsubstring(int arr[],int n,int target){
+void subarraySum(int arr[],int n,int target){
     int start=0,end=0;
     int currentsum=arr[start];
     while(currentsum!=target){
@@ -28,7 +28,7 @@ void findsubstring(int arr[],int n,int target){
     if(start>n || end>n){
         cout<<-1;
     }else{
-        cout<<start+1<<" "<<end+1;
+        cout<<start<<" "<<end;
     }
 }
 
@@ -42,7 +42,7 @@ int main() {
 	    for(int i =0;i<n;i++){
 	        cin>>arr[i];
 	    }
-	    findsubstring(arr,n,target);
+	    subarraySum(arr,n,target);
 	    cout<<endl;
 	}
 	return 0;
