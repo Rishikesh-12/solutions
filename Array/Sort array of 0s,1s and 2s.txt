@@ -1,6 +1,8 @@
+Sort an array of 0s, 1s and 2s.
+
 Question Link - https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0#
 
-----------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 
 Solution - 
 
