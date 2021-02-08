@@ -1,0 +1,43 @@
+Reorder an array according to given indexes
+
+Question Link - https://www.geeksforgeeks.org/reorder-a-array-according-to-given-indexes/
+-----------------------------------------------------------------------------------------------------
+
+Solution-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void reorder(int arr[], int index[], int n){
+    int curr=0;
+    int point=index[0];
+    while(curr<n){
+        swap(arr[curr],arr[point]);
+        swap(index[curr],index[point]);
+        if(point==curr){
+            curr++;
+        }
+        point=index[curr];
+    }
+}
+
+void printNewOrder(int arr[], int index[], int n){
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    for(int i=0;i<n;i++){
+        cout<<index[i]<<" ";
+    }
+    cout<<endl;
+}
+
+int main(){
+    int arr[]   = {50, 40, 70, 60, 90};
+    int index[] = {3,  0,  4,  1,  2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    reorder(arr,index, n);
+    printNewOrder(arr,index,n);
+    cout<<endl;
+    return 0;
+}
