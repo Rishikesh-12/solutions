@@ -1,0 +1,50 @@
+Quesiton Link - https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/
+------------------------------------------------------------------------------------
+Solution - 
+
+
+
+public class Main
+{
+    static void doubleCheckUtil(String s, String pattern, int stringHash, int patternHash, int start,int patlen){
+        int n = start+patlen-1;
+        int j=0;
+        for(int i=start;i<n;i++,j++){
+            if(s.charAt(i) != pattern.charAt(j)) return;
+        }
+        System.out.println(start);
+        // System.out.println(s.substring(start,start+patlen));
+        
+    }
+    
+    static void rabinkarp(String s, String pattern){
+        
+        int patlen = pattern.length();
+        int stringlen = s.length();
+        
+        int patternHash = 0;
+        int stringHash=0;
+        for(int i=0;i<patlen;i++){
+            patternHash+= (int) pattern.charAt(i);
+            stringHash+= (int) s.charAt(i);
+        }
+        Main.doubleCheckUtil(s, pattern, stringHash,patternHash,0,patlen);
+        
+        for(int i=1;i<=stringlen-patlen;i++){
+            stringHash -= (int) s.charAt(i-1);
+            stringHash += (int) s.charAt(i+patlen-1);
+            if (stringHash == patternHash){
+                Main.doubleCheckUtil(s, pattern,stringHash,patternHash,i,patlen);
+            }
+        }
+        
+    }
+    
+    
+    
+	public static void main(String[] args) {
+	                   // 0123456789012345             
+	    Main.rabinkarp("AABAACAADAABAABA","AABA");
+	}
+}
+

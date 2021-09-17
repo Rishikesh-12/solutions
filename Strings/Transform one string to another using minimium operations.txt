@@ -1,0 +1,31 @@
+Question - https://www.geeksforgeeks.org/transform-one-string-to-another-using-minimum-number-of-given-operation/
+
+------------------------------------------------------------
+Solution -
+
+
+int minimumOperations(String a, String b){
+	if(a.length() != b.length()) return -1;
+
+	int arr[] = new int[256];
+
+	for(int i=0;i<a.length();i++){
+		arr[a.charAt(i)]++;
+		arr[b.charAt(i)]--;
+	}
+
+	for(int i:arr) if (i!=0) return -1;
+
+	int i=a.length()-1, j=b.length()-1;
+	int result = 0;
+
+	while(i>=0){
+		if(a.charAt(i) != b.charAt(j))
+			result++;
+		else
+			j--;
+		i--;
+	}
+
+	return result;
+}

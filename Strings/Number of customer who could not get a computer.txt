@@ -1,0 +1,33 @@
+Question Link - https://www.geeksforgeeks.org/function-to-find-number-of-customers-who-could-not-get-a-computer/
+
+------------------------------------------------------------------
+Solution-
+
+int customerCount(int n, String s){
+
+	char[] seen = new char[26];
+	int result=0;
+	int occupied=0;
+
+	for(int i=0;i<s.length();i++){
+
+		int ind = s.charAt(i)-'A';
+
+		if(seen[ind] == 0){
+			seen[ind]=1;
+			if(occupied <n){
+				occupied++;
+			}
+			else{
+				result++;
+			}
+		}
+		else{
+			if(seen[ind] == 1) occupied--;
+			seen[ind]=0;
+		}
+	}
+
+	return res;
+
+}

@@ -1,0 +1,41 @@
+Question - https://practice.geeksforgeeks.org/problems/first-and-last-occurrences-of-x3116/1
+
+---------------------------------------------------------------
+Solution-
+
+class GFG
+{
+    ArrayList<Long> list = new ArrayList<>();
+    
+    ArrayList<Long> find(long arr[], int n, int x)
+    {
+        // code here
+        list.add(first(arr,0,n-1,x,n));
+        list.add(last(arr,0,n-1,x,n));
+        return list;
+        
+    }
+    
+    long first(long[] arr, int start, int end, int target,int n){
+        if(start<=end){
+            int mid = start + (end-start)/2;
+            if(arr[mid]==target && (mid==0 || arr[mid-1]<target)) return mid;
+            else if(arr[mid]<target) return first(arr,mid+1,end,target,n);
+            else return first(arr,start,mid-1,target,n);
+        }
+        
+        return -1;
+    }
+    
+    long last(long[] arr, int start, int end, int target, int n){
+        if(start<=end){
+            int mid = start + (end-start)/2;
+            if(arr[mid]==target && (mid==n-1 || arr[mid+1]>target)) return mid;
+            else if(arr[mid]>target) return last(arr,start,mid-1,target,n);
+            else return last(arr,mid+1,end,target,n);
+        }
+        
+        return -1;
+    }
+    
+}

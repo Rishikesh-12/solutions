@@ -1,0 +1,23 @@
+question - https://www.geeksforgeeks.org/print-subsequences-string/
+-----------------------------------------------------------
+Solution - 
+
+class Main{
+	
+	public static void findSubsequence(String s,int i, int n, String ans){
+		if(i==n){
+			System.out.println(ans);
+		}
+		else{
+			findSubsequence(s,i+1,n,ans);
+			ans+=s.charAt(i);
+			findSubsequence(s,i+1,n,ans);
+		}
+	}
+	
+
+	public static void main(String[] args){
+		String s="abcd";
+		Main.findSubsequence(s,0,s.length(),"");
+	}
+}
