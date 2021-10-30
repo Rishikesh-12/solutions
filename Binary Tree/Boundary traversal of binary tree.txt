@@ -1,0 +1,52 @@
+Question - https://practice.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{
+    ArrayList<Integer> arr = new ArrayList<>();
+	public void leftUtill(Node node){
+	    if(node == null) return;
+	    
+	    if(node.left != null) {
+	        arr.add(node.data);
+	        leftUtill(node.left);
+	    }
+	    else if(node.right != null){
+	        arr.add(node.data);
+	        leftUtill(node.right);
+	    }
+	}
+	
+	public void rightUtill(Node node){
+	    if(node == null) return;
+	    
+	    if(node.right!=null){
+	        rightUtill(node.right);
+	        arr.add(node.data);
+	    }
+	    else if(node.left!=null){
+	        rightUtill(node.left);
+	        arr.add(node.data);
+	    }
+	}
+	
+	public void leafUtill(Node node){
+	    if(node == null) return;
+	    leafUtill(node.left);
+	    if(node.right == null && node.left == null) arr.add(node.data);
+	    leafUtill(node.right);
+	}
+	
+	ArrayList <Integer> printBoundary(Node node)
+	{
+	    if(node == null) return arr;
+	    arr.add(node.data);
+	    leftUtill(node.left);
+	    leafUtill(node.left);
+	    leafUtill(node.right);
+	    rightUtill(node.right);
+	    return arr;
+	}
+}
