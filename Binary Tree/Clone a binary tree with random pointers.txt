@@ -1,0 +1,52 @@
+Question - https://practice.geeksforgeeks.org/problems/clone-a-binary-tree/1
+
+
+Very good question.
+--------------------------------------------------------
+Solution- 
+
+/*Complete the function below
+Node is as follows:
+class Tree{
+	int data;
+	Tree left,right,random;
+	Tree(int d){
+		data=d;
+		left=null;
+		right=null;
+		random=null;
+	}
+}*/
+class Solution{
+    public Tree cloneTree(Tree tree){
+       // add code here.
+       if(tree == null){
+           return null;
+       }
+       
+       HashMap<Tree, Tree> map = new HashMap<>();
+       Tree cTree = cloneTreeUtill(tree, map);
+       copyRandom(tree, cTree, map);
+       return cTree;
+    }
+    
+    public Tree cloneTreeUtill(Tree tree, HashMap<Tree,Tree> map){
+        if(tree == null){
+            return null;
+        }
+        Tree clone = new Tree(tree.data);
+        map.put(tree, clone);
+        clone.left = cloneTreeUtill(tree.left, map);
+        clone.right = cloneTreeUtill(tree.right, map);
+        return clone;
+    }
+    
+    public void copyRandom(Tree tree, Tree clone, HashMap<Tree,Tree> map){
+        if(clone == null){
+            return;
+        }
+        clone.random = map.get(tree.random);
+        copyRandom(tree.left, clone.left, map);
+        copyRandom(tree.right,clone.right,map);
+    }
+}
