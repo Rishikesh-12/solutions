@@ -1,0 +1,21 @@
+Question name - Inorder tree traversal without recursion
+
+Question - https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+
+--------------------------------------------------------
+Solution- 
+
+void inorderTraversal(Node node){
+	if(node == null) return;
+	Stack<Node> st = new Stack<>();
+	Node curr = node;
+	while(curr != null || st.size() > 0){
+		while(curr != null){
+			st.push(curr);
+			curr = curr.left;
+		}
+		curr = st.pop();
+		System.out.println(curr.data);
+		curr = curr.right;
+	}
+}
