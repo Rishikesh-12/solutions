@@ -1,0 +1,39 @@
+Question name - Number of subarrays with maximum values in given range
+
+Question - https://practice.geeksforgeeks.org/problems/number-of-subarrays-with-maximum-values-in-given-range5949/1
+
+--------------------------------------------------------
+Solution- 
+
+
+class Solution{
+    
+    static int countSubarraysUtil(int n){
+        return n*(n+1)/2;
+    }
+    static long countSubarrays(int a[], int n, int L, int R)  
+    { 
+        long res = 0;
+        int exc = 0;
+        int inc = 0;
+        
+        for(int i=0;i<n;i++){
+            if(a[i]<L){
+                inc++;
+                exc++;
+            }
+            else if(a[i]>R){
+                res += countSubarraysUtil(inc) - countSubarraysUtil(exc);
+                inc = 0;
+                exc = 0;
+            }
+            else{
+                res-=countSubarraysUtil(exc);
+                inc++;
+                exc=0;
+            }
+        }
+        res+=countSubarraysUtil(inc) - countSubarraysUtil(exc);
+        return res;
+    } 
+}

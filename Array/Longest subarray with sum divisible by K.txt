@@ -1,0 +1,28 @@
+Question name - Longest subarray with sum divisible by K
+
+Question - https://practice.geeksforgeeks.org/problems/longest-subarray-with-sum-divisible-by-k1259/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution{
+    int longSubarrWthSumDivByK(int a[], int n, int k)
+    {
+        // Complete the function
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0,-1);
+        int sum=0;
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            sum+=a[i];
+            int rem = ((sum % k) + k) % k;
+            if(map.containsKey(rem)){
+                ans = Math.max(ans, i- map.get(rem));
+            }
+            else{
+                map.put(rem, i);
+            }
+        }
+       return ans;
+    }
+}
