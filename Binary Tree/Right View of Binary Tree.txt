@@ -1,0 +1,28 @@
+Question name - Right View of Binary Tree
+
+Question - https://www.geeksforgeeks.org/print-right-view-binary-tree-2/
+
+--------------------------------------------------------
+Solution- 
+
+class Tree
+{
+    //Function to return list containing elements of right view of binary tree.
+    ArrayList<Integer> rightView(Node root)
+    {
+        ArrayList<Integer> arr = new ArrayList<>();
+        if(root == null) return arr;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i=0; i<size; i++){
+                Node curr = q.poll();
+                if(i==(size-1)) arr.add(curr.data);
+                if(curr.left != null) q.add(curr.left);
+                if(curr.right != null) q.add(curr.right);
+            }
+        }
+        return arr;
+    }
+}
