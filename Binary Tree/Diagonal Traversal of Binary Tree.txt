@@ -1,0 +1,28 @@
+Question name - Diagonal Traversal of Binary Tree
+
+Question - https://practice.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Tree
+{
+     public ArrayList<Integer> diagonal(Node root)
+      {
+           ArrayList<Integer> arr = new ArrayList<>();
+           if(root == null) return arr;
+           Queue<Node> q = new LinkedList<>();
+           q.add(root);
+           while(!q.isEmpty()){
+                Node curr = q.poll();
+                while(curr != null){
+                    if(curr.left != null){
+                        q.add(curr.left);
+                    }
+                    arr.add(curr.data);
+                    curr = curr.right;
+                }
+           }
+           return arr;
+      }
+}
