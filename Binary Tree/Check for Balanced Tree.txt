@@ -1,0 +1,35 @@
+Question name - Check for Balanced Tree
+
+Question - https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Tree
+{
+    int height(Node node){
+        if (node == null)
+            return 0;
+        else {
+            /* compute the depth of each subtree */
+            int lh = height(node.left);
+            int rh = height(node.right);
+ 
+            /* use the larger one */
+            return Math.max(lh,rh) + 1;
+        }
+    }
+    
+    //Function to check whether a binary tree is balanced or not.
+    boolean isBalanced(Node root)
+    {
+        if (root == null)
+            return true;
+	    int leftSubtreeHeight = height(root.left);
+	    int rightSubtreeHeight = height(root.right);
+	    int diff = Math.abs(leftSubtreeHeight - rightSubtreeHeight);
+	   // System.out.println(leftSubtreeHeight+" "+rightSubtreeHeight+" "+diff);
+	    if(diff <= 1 && isBalanced(root.left) && isBalanced(root.right)) return true;
+	    return false;
+    }
+}

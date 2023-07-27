@@ -1,0 +1,35 @@
+Question name - Contruct tree from preorder traversal
+
+Question - https://practice.geeksforgeeks.org/problems/construct-tree-from-preorder-traversal/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution{
+    Node constructTree(int n, int pre[], char preLN[]){
+        Node root = new Node(pre[0]);
+        Stack<Node> st = new Stack<>();
+        if(preLN[0]=='L'){
+            return root;
+        }
+        st.push(root);
+        for(int i=1;i<n;i++){
+            Node temp = new Node(pre[i]);
+            if(st.peek().left == null){
+                st.peek().left = temp;
+            }
+            else if(st.peek().right == null){
+                st.peek().right = temp;
+            }
+            else{
+                while (st.peek().left!=null && st.peek().right!=null){
+                    st.pop();
+                }
+                st.peek().right = temp;
+            }
+            if (preLN[i] != 'L')
+                st.push(temp);
+        }
+        return root;
+    }
+}
