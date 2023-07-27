@@ -1,0 +1,30 @@
+Question name - Reverse Level Order Traversal
+
+Question - https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1
+
+--------------------------------------------------------
+Solution- 
+
+class Tree
+{
+    public ArrayList<Integer> reverseLevelOrder(Node node) 
+    {
+        // code here
+        ArrayList<Integer> arr = new ArrayList<>();
+        if(node == null) return arr;
+        
+        Stack<Integer> st = new Stack<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        while(!q.isEmpty()){
+            Node curr = q.poll();
+            st.push(curr.data);
+            if(curr.right!=null) q.add(curr.right);
+            if(curr.left!=null) q.add(curr.left);
+        }
+        while(!st.empty()){
+            arr.add(st.pop());
+        }
+        return arr;
+    }
+}    

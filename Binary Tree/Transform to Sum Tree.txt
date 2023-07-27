@@ -1,0 +1,20 @@
+Question name - Transform to Sum Tree
+
+Question - https://practice.geeksforgeeks.org/problems/d7e0ce338b11f0be36877d9c35cc8dfad6636957/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution{
+    public void toSumTree(Node root){
+         //add code here.
+         toSumTreeUtill(root);
+    }
+    
+    public int toSumTreeUtill(Node node){
+        if(node == null) return 0;
+        int old_data = node.data;
+        node.data = toSumTreeUtill(node.left) + toSumTreeUtill(node.right);
+        return node.data + old_data;
+    }
+}
