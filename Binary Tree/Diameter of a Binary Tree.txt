@@ -1,0 +1,28 @@
+Question name - Diameter of a Binary Tree
+
+Question - https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+    // Function to return the diameter of a Binary Tree.
+    int diameter(Node root) {
+        // Your code here
+        if (root == null)
+            return 0;
+        int lh = height(root.left);
+        int rh = height(root.right);
+        int ldiameter = diameter(root.left);
+        int rdiameter = diameter(root.right);
+        
+        return Math.max(lh+rh+1, Math.max(ldiameter, rdiameter));
+    }
+    
+    int height(Node node){
+        if(node == null) return 0;
+        int lh=height(node.left);
+        int rh=height(node.right);
+        return Math.max(lh,rh)+1;
+    }
+}
