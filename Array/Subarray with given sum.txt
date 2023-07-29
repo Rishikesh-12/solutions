@@ -1,49 +1,37 @@
 Subarray with given sum
 
-question link - https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+question link - https://practice.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1
 
 ------------------------------------------------------------
 
 Solution-
 
-#include <bits/stdc++.h>
-using namespace std;
-
-void subarraySum(int arr[],int n,int target){
-    int start=0,end=0;
-    int currentsum=arr[start];
-    while(currentsum!=target){
-        if(currentsum<target){
-            end++;
-            currentsum+=arr[end];
+class Solution
+{
+    //Function to find a continuous sub-array which adds up to a given number.
+    static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
+    {
+        ArrayList<Integer> result = new ArrayList<>();
+        int currentSum = arr[0], start = 0, i;
+  
+        for (i = 1; i <= n; i++) {
+            while (currentSum > s && start < i - 1) {
+                currentSum = currentSum - arr[start];
+                start++;
+            }
+  
+            if (currentSum == s) {
+                result.add(start+1);
+                result.add(i);
+                break;
+            }
+  
+            if (i < n)
+                currentSum = currentSum + arr[i];
         }
-        if(currentsum>target){
-            currentsum-=arr[start];
-            start++;
-        }
-        if(start>n || end>n){
-            break;
-        }
+        
+        if(result.size()==0) result.add(-1);
+        return result;
+    
     }
-    if(start>n || end>n){
-        cout<<-1;
-    }else{
-        cout<<start<<" "<<end;
-    }
-}
-
-int main() {
-	int t;
-	cin>>t;
-	while(t--){
-	    int n,target;
-	    cin>>n>>target;
-	    int arr[n];
-	    for(int i =0;i<n;i++){
-	        cin>>arr[i];
-	    }
-	    subarraySum(arr,n,target);
-	    cout<<endl;
-	}
-	return 0;
 }

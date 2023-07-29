@@ -1,42 +1,26 @@
-Equilibrium point
+Question - Equilibrium point
 
-Question Link- https://practice.geeksforgeeks.org/problems/equilibrium-point/0
+Question Link- https://practice.geeksforgeeks.org/problems/equilibrium-point-1587115620/1
 
 -----------------------------------------------------------------------------
 Solution - 
-#include <bits/stdc++.h>
-using namespace std;
 
-int equilibrium(int arr[], int n){
-    if(n<=2){
-        return -1;
-    }
-    int total=0;
-    for(int i=0;i<n;i++){
-        total+=arr[i];
-    }
-    
-    int curr=0;
-    for(int i=0;i<n;i++){
-        total-=arr[i];
-        if(curr==total)
-            return i;
-        curr+=arr[i];
-    }
-    return -1;
-}
+int equilibrium(int arr[], int n)
+{
+	int sum = 0;
+	int leftsum = 0;
 
-int main() {
-	int t;
-	cin>>t;
-	while(t--){
-	    int n;
-	    cin>>n;
-	    int arr[n];
-	    for(int i =0;i<n;i++){
-	        cin>>arr[i];
-	    }
-	    cout<<equilibrium(arr,n)<<endl;
+	for (int i = 0; i < n; ++i)
+		sum += arr[i];
+
+	for (int i = 0; i < n; ++i) {
+		sum -= arr[i];
+
+		if (leftsum == sum)
+			return i+1;
+
+		leftsum += arr[i];
 	}
-	return 0;
+	
+	return -1;
 }
