@@ -1,0 +1,36 @@
+Question name - Min distance between two given nodes of a Binary Tree
+
+Question - https://practice.geeksforgeeks.org/problems/min-distance-between-two-given-nodes-of-a-binary-tree/1ḥ
+
+--------------------------------------------------------
+Solution- 
+
+class GfG {
+    int findDist(Node root, int a, int b) {
+        // Your code here
+        Node lca = lca(root, a, b);
+        int dist1 = level(lca, a, 0);
+        int dist2 = level(lca, b, 0);
+        
+        return dist1+dist2;
+    }
+    
+    Node lca(Node node, int a, int b){
+        if(node == null || node.data == a || node.data == b) return node;
+        
+        Node left = lca(node.left, a, b);
+        Node right = lca(node.right, a, b);
+        
+        if(left == null) return right;
+        else if(right == null) return left;
+        else return node;
+    }
+    
+    int level(Node node, int a, int level){
+        if(node == null) return -1;
+        if(node.data == a) return level;
+        int left = level(node.left, a, level+1);
+        if(left == -1) return level(node.right, a, level+1);
+        return left;
+    }
+}

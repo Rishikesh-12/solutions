@@ -1,0 +1,39 @@
+Question name - Binary Tree to DLL
+
+Question - https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{ 
+    //Function to convert binary tree into circular doubly linked list.
+    Node head;
+    Node prev = null;
+    Node bToDLL(Node root)
+    {
+        //your code here
+        bTreeToDLL(root);
+        head.left=null;
+        prev.right=null;
+        return head;
+    }
+    
+    void bTreeToDLL(Node node){
+        if(node == null) return;
+        
+        bTreeToCDLL(node.left);
+        
+        if(prev == null){
+            head = node;
+        }
+        else{
+            node.left = prev;
+            prev.right = node;
+        }
+        prev = node;
+        
+        bTreeToCDLL(node.right);
+    }
+    
+}
