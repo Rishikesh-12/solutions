@@ -1,0 +1,28 @@
+Largest Sum Contiguous Subarray (Kadane’s Algorithm)
+
+------------------------------------------------------------
+question 3 - https://practice.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1
+
+------------------------------------------------------------
+Solution -
+
+class Solution{
+
+    long maxSubarraySum(int arr[], int n){
+        
+        // Your code here
+        long max_soFar = Integer.MIN_VALUE;
+        long max_endingHere = 0;
+        
+        for(int i=0;i<n;i++){
+            max_endingHere += arr[i];
+            max_soFar = Math.max(max_soFar, max_endingHere);
+            if(max_endingHere < 0){
+                max_endingHere = 0;
+            }
+        }
+        
+        return max_soFar;
+    }
+    
+}
