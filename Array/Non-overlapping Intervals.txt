@@ -1,0 +1,36 @@
+Question name - Non Overlapping Intervals
+
+Question - https://practice.geeksforgeeks.org/problems/non-overlapping-intervals/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+    static int minRemoval(int N, int intervals[][]) {
+        // code here
+        Arrays.sort(intervals, new Comparator<>(){
+            public int compare(int[] a, int[] b){
+                return a[1]-b[1];
+            }
+        });
+        
+        if(N<2) return 0;
+        
+        int count=1;
+        
+        int i=0;
+        int j=1;
+        while(j<N){
+            if(intervals[i][1]>intervals[j][0]){
+                j++;
+            }
+            else{
+                i=j;
+                j++;
+                count++;
+            }
+        }
+        return N-count;
+        
+    }
+}
