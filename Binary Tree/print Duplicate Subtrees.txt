@@ -1,0 +1,41 @@
+Question name - Duplicate Subtrees
+
+Question - https://practice.geeksforgeeks.org/problems/duplicate-subtrees/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution{
+   
+    public List<Node> printAllDups(Node root)
+    {
+        ArrayList<Node> result = new ArrayList<>();
+        HashMap<String, Integer> map = new HashMap<>();
+        inorder(root, map, result);
+        //Arrange nodes in the answer array based on the lexicographically increasing order of their preorder traversal of subtree.
+        Collections.sort(result, (n1, n2) -> Integer.compare(n1.data, n2.data)); 
+        return result;
+    }
+    
+    public String inorder(Node node, HashMap<String, Integer> map, ArrayList<Node> arr){
+        
+        if(node == null) return "";
+        String str = "(";
+        str += inorder(node.left, map, arr);
+        str += Integer.toString(node.data);
+        str += inorder(node.right, map, arr);
+        str += ")";
+        
+        if (map.get(str) != null && map.get(str)==1 )
+            arr.add(node);
+      
+        if (map.containsKey(str))
+            map.put(str, map.get(str) + 1);
+        else
+            map.put(str, 1);
+         
+        
+        return str;
+    }
+    
+}

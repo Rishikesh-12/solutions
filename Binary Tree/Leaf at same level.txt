@@ -1,0 +1,40 @@
+Question name - Leaf at same level
+
+Question - https://practice.geeksforgeeks.org/problems/leaf-at-same-level/1
+--------------------------------------------------------
+Solution- 
+
+class leaf{
+    int leafLevel = 0;
+}
+
+class Solution
+{
+    leaf mylevel = new leaf();
+    
+    boolean check(Node root)
+    {
+        int leafLevel = 0;
+    	return checkUtill(root, 0, mylevel);	
+	    
+    }
+    
+    boolean checkUtill(Node node, int currLevel, leaf mylevel){
+	    
+	    if(node == null) {
+	        return true;
+	    }
+	    
+	    if(node.left == null && node.right == null){
+	        if(mylevel.leafLevel == 0) {
+	            mylevel.leafLevel = currLevel;
+	            return true;
+	        }
+	        
+	        return (mylevel.leafLevel == currLevel);
+	    }
+	    
+	    return checkUtill(node.left, currLevel+1, mylevel) && checkUtill(node.right, currLevel+1, mylevel);
+        
+    }
+}

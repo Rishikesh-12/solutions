@@ -1,0 +1,38 @@
+Question name - Sum of nodes on the longest path from root to leaf node
+
+Question - https://practice.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution{
+    
+    
+        int maxLen = Integer.MIN_VALUE;
+        int maxSum = 0;
+    
+    public int sumOfLongRootToLeafPath(Node root)
+    {
+        sumOfLongRootToLeafPathUtill(root, 0, 0);
+        return maxSum;
+    }
+    
+    public void sumOfLongRootToLeafPathUtill(Node node, int len, int sum){
+        
+        if(node == null){
+            if(len>maxLen){
+                maxLen = len;
+                maxSum = sum;
+            }
+            else if( len == maxLen){
+                maxSum = Math.max(maxSum, sum);
+            }
+            return;
+        }
+        
+        sumOfLongRootToLeafPathUtill(node.left, len+1, sum+node.data);
+        sumOfLongRootToLeafPathUtill(node.right, len+1, sum+node.data);
+        
+    }
+    
+}

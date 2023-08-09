@@ -1,0 +1,34 @@
+Question name - Check Mirror in N-ary tree
+
+Question - https://practice.geeksforgeeks.org/problems/check-mirror-in-n-ary-tree1528/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+    static int checkMirrorTree(int n, int e, int[] A, int[] B) {
+        // code here
+        
+        Map<Integer, Stack<Integer>> map = new HashMap<>();
+        
+        for(int i=0;i<2*e;i+=2){
+            if(map.containsKey(A[i])){
+                map.get(A[i]).push(A[i+1]);
+            }
+            else{
+                Stack<Integer> st = new Stack<>();
+                st.push(A[i+1]);
+                map.put(A[i],st);
+            }
+        }
+        
+        for(int i=0;i<2*e;i+=2){
+            if(map.get(B[i]).peek() == B[i+1])
+                map.get(B[i]).pop();
+            else
+                return 0;
+        }
+        
+        return 1;
+    }
+};

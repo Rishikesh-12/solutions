@@ -1,0 +1,31 @@
+Question name - Largest subtree sum in a tree
+
+Question - https://practice.geeksforgeeks.org/problems/largest-subtree-sum-in-a-tree/1
+
+--------------------------------------------------------
+Solution- 
+
+class Max{
+    int v = Integer.MIN_VALUE;
+}
+
+class Solution {
+    
+    public static int findLargestSubtreeSum(Node root) {
+        Max max = new Max();
+        findLargestSubtreeSumUtill(root, max);
+        return max.v;
+    }
+    
+    public static int findLargestSubtreeSumUtill(Node node, Max max){
+        if(node == null) return 0;
+        
+        int currSum = node.data + findLargestSubtreeSumUtill(node.left, max) + findLargestSubtreeSumUtill(node.right, max);
+        
+        max.v = Math.max(currSum, max.v);
+        
+        return currSum;
+        
+        
+    }
+}
