@@ -1,0 +1,32 @@
+Question name - Longest consecutive subsequence
+
+Question - https://practice.geeksforgeeks.org/problems/longest-consecutive-subsequence2449/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{   
+	static int findLongestConseqSubseq(int arr[], int N)
+	{
+	   HashSet<Integer> hs = new HashSet<>();
+	   for(int i=0;i<N;i++){
+	       hs.add(arr[i]);
+	   }
+	   
+	   int ans = 0;
+	   
+	   for(int i=0;i<N;i++){
+	       if(!hs.contains(arr[i]-1)){
+	           int j = arr[i];
+	           while(hs.contains(j)){
+	               hs.remove(new Integer(j));
+	               j++;
+	           }
+	           
+	           ans=Math.max(ans, j-arr[i]);
+	       }
+	   }
+	   return ans;
+	}
+}

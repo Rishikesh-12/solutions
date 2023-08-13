@@ -1,0 +1,33 @@
+Question name - Smallest subarray with sum greater than x
+
+Question - https://practice.geeksforgeeks.org/problems/smallest-subarray-with-sum-greater-than-x5651/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+
+    public static int smallestSubWithSum(int a[], int n, int x) {
+        // Your code goes here 
+        
+        int minLen = n+1;
+        int start=0;
+        int end=0;
+        int currSum=0;
+        
+        while(end<n){
+            while(currSum<=x && end<n){
+                currSum+=a[end];
+                end++;
+            }
+            
+            while(currSum>x && start<n){
+                if(end-start < minLen) minLen = end - start;
+                currSum-=a[start];
+                start++;
+            }
+        }
+        if(minLen == n+1 ) return 0;
+        return minLen;
+    }
+}
