@@ -1,0 +1,36 @@
+Question name - Normal BST to Balanced BST
+
+Question - https://practice.geeksforgeeks.org/problems/normal-bst-to-balanced-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class GfG
+{
+    Node buildBalancedTree(Node root) 
+    {
+        //Add your code here.
+        ArrayList<Integer> arr = new ArrayList<>();
+        treeToArrayListInorder(root, arr);
+        return arrayListToBalancedBST(arr, 0, arr.size()-1);
+        
+    }
+    
+    void treeToArrayListInorder(Node node, ArrayList<Integer> arr){
+        if(node == null) return;
+        treeToArrayListInorder(node.left, arr);
+        arr.add(node.data);
+        treeToArrayListInorder(node.right,arr);
+    }
+    
+    Node arrayListToBalancedBST(ArrayList<Integer> arr, int start, int end){
+        
+        if(start>end) return null;
+        int mid = (start + end) / 2;
+        Node node = new Node(arr.get(mid));
+        node.left = arrayListToBalancedBST(arr, start, mid-1);
+        node.right = arrayListToBalancedBST(arr, mid+1, end);
+        return node;
+        
+    }
+}

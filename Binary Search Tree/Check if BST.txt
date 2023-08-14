@@ -1,0 +1,22 @@
+Question name - Check if BST
+
+Question - https://practice.geeksforgeeks.org/problems/check-for-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{
+    //Function to check whether a Binary Tree is BST or not.
+    boolean isBST(Node root)
+    {
+        // code here.
+        return isBSTUtill(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    
+    boolean isBSTUtill(Node node, int min, int max){
+        if(node == null) return true;
+        if(node.data < min || node.data > max) return false;
+        return isBSTUtill(node.left, min, node.data-1) && isBSTUtill(node.right, node.data + 1, max);
+    }
+}

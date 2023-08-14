@@ -1,0 +1,45 @@
+Question name - Inorder Predecessor and Successor
+
+Question - https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1
+
+--------------------------------------------------------
+Solution- 
+
+public static void findPreSuc(Node root, int key)
+{
+    // code here.
+    
+    /* There are two static nodes defined above pre(representing predecessor) and suc(representing successor) as follows:
+       static Node pre=null,suc=null
+       You need to update these both.
+       And the data inside these classes will be printed automatically by the driver code. 
+    */
+    if(root == null) return;
+    if(key<root.data){
+        suc=root;
+        findPreSuc(root.left, key);
+    }
+    else if(key > root.data){
+        pre = root;
+        findPreSuc(root.right,key);
+    }
+    else{
+        if(root.left != null)
+        {
+            Node curr = root.left;
+            while(curr.right!=null){
+                curr = curr.right;
+            }
+            pre=curr;
+        }
+        if(root.right != null)
+        {
+            Node curr = root.right;
+            while(curr.left!=null){
+                curr = curr.left;
+            }
+            suc=curr;
+        }
+    }
+}
+}

@@ -1,0 +1,27 @@
+Question name - Lowest Common Ancestor in a BST
+
+Question - https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class BST
+{   
+    //Function to find the lowest common ancestor in a BST. 
+	Node LCA(Node root, int n1, int n2)
+	{
+        // code here.  
+        if(root == null) return null;
+        
+        Node curr = root;
+        
+        while(curr!=null){
+            if(n1 < curr.data && n2<curr.data) curr = curr.left;
+            else if(n1 > curr.data && n2>curr.data) curr = curr.right;
+            else return curr;
+        }
+        
+        return root;
+    }
+    
+}

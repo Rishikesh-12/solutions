@@ -1,0 +1,37 @@
+Question name - Binary Tree to BST
+
+Question - https://practice.geeksforgeeks.org/problems/binary-tree-to-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{
+    // The given root is the root of the Binary Tree
+    // Return the root of the generated BST
+    int index = 0;
+    Node binaryTreeToBST(Node root)
+    {
+       // Your code here
+       ArrayList<Integer> arr = new ArrayList<>();
+       treeToArrayListInorder(root, arr);
+       Collections.sort(arr);
+       arrayListToBSTInorder(root,arr);
+       return root;
+    }
+    
+    void treeToArrayListInorder(Node node, ArrayList<Integer> arr){
+        if(node == null) return;
+        treeToArrayListInorder(node.left, arr);
+        arr.add(node.data);
+        treeToArrayListInorder(node.right,arr);
+    }
+    
+    void arrayListToBSTInorder(Node node, ArrayList<Integer> arr){
+        if(node == null) return;
+        arrayListToBSTInorder(node.left, arr);
+        node.data = arr.get(index);
+        index++;
+        arrayListToBSTInorder(node.right,arr);
+    }
+}

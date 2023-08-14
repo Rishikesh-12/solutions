@@ -1,0 +1,22 @@
+Question name - Find a value in a BST
+
+Question - https://practice.geeksforgeeks.org/problems/search-a-node-in-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class BST {
+    // Function to search a node in BST.
+    boolean search(Node root, int x) {
+        // Your code here
+        Node curr = root;
+        
+        while(curr != null ){
+            if(x == curr.data) return true;
+            else if(x>curr.data) curr=curr.right;
+            else curr=curr.left;
+        }
+        
+        return false;
+    }
+}
