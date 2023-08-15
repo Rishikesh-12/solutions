@@ -1,0 +1,35 @@
+Question name - Kth Smallest Element in a BST
+
+Question - https://practice.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1
+
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+    // Return the Kth smallest element in the given BST
+    int ans;
+    int count;
+    public int KthSmallestElement(Node root, int K) {
+        // Write your code here
+        ans=-1;
+        count = 1;
+        inorder(root,K);
+        return ans;
+    }
+    
+    public void inorder(Node node, int k){
+        if(node == null) return;
+        inorder(node.left, k);
+        if(count==k){
+            ans=node.data;
+            count++;
+            return;
+        }
+        else{
+            count++;
+        }
+        inorder(node.right, k);
+    }
+}

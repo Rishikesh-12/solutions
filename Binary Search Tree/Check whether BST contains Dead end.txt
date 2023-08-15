@@ -1,0 +1,21 @@
+Question name - Check whether BST contains Dead end
+
+Question - https://practice.geeksforgeeks.org/problems/check-whether-bst-contains-dead-end/1
+
+--------------------------------------------------------
+Solution- 
+
+class GFG
+{
+    public static boolean isDeadEnd(Node root)
+    {
+        //Add your code here.
+        return isDeadEndUtill(root,1,Integer.MAX_VALUE);
+    }
+    
+    static boolean isDeadEndUtill(Node root, int min, int max){
+        if(root == null) return false;
+        if(min == max) return true;
+        return isDeadEndUtill(root.left, min, root.data-1) || isDeadEndUtill(root.right, root.data+1, max);
+    }
+}

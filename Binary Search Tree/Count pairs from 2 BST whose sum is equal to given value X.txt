@@ -1,0 +1,32 @@
+Question name - Count pairs from 2 BST whose sum is equal to given value "X"
+
+Question - https://practice.geeksforgeeks.org/problems/brothers-from-different-root/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{
+    static int count;
+	public static int countPairs(Node root1, Node root2, int x)
+	{
+		// Code here
+		count = 0;
+		solve(root1,root2,x);
+		return count;
+	}
+	
+	static void solve(Node node1, Node node2, int x){
+	    if(node1 == null) return;
+	    solve(node1.left, node2, x);
+	    if(fetch(node2,x-node1.data)) count++;
+	    solve(node1.right, node2, x);
+	}
+	
+	static boolean fetch(Node node, int val){
+	    if(node == null) return false;
+        if(val < node.data ) return fetch(node.left,val);
+        else if(val > node.data) return fetch(node.right,val);
+        return true;
+	}
+}

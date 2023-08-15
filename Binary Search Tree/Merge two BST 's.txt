@@ -1,0 +1,60 @@
+Question name - Merge two BST 's
+
+Question - https://practice.geeksforgeeks.org/problems/merge-two-bst-s/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution
+{
+    //Function to return a list of integers denoting the node 
+    //values of both the BST in a sorted order.
+    public List<Integer> merge(Node root1,Node root2)
+    {
+        // Write your code here
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        
+        treeToInorderArrayList(root1, arr1);
+        treeToInorderArrayList(root2, arr2);
+        
+        return mergeArray(arr1, arr1.size(),arr2, arr2.size());
+        
+        
+    }
+    
+    public void treeToInorderArrayList(Node root, ArrayList<Integer> arr){
+        if(root == null) return;
+        treeToInorderArrayList(root.left, arr);
+        arr.add(root.data);
+        treeToInorderArrayList(root.right,arr);
+    }
+    
+    ArrayList<Integer> mergeArray(ArrayList<Integer> arr1, int m, ArrayList<Integer> arr2, int n){
+        int i=0;
+        int j=0;
+        ArrayList<Integer> arr3 = new ArrayList<>();
+        while(i<m && j<n){
+            if(arr1.get(i)<=arr2.get(j)){
+                arr3.add(arr1.get(i));
+                i++;
+            }
+            else if(arr1.get(i)>arr2.get(j)){
+                arr3.add(arr2.get(j));
+                j++;
+            }
+        }
+        
+        while(i<m){
+            arr3.add(arr1.get(i));
+                i++;
+        }
+        
+        while(j<n){
+            arr3.add(arr2.get(j));
+                j++;
+        }
+        
+        return arr3;
+    }
+}
