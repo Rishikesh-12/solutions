@@ -1,0 +1,28 @@
+Question name - Factorial of large numbers
+
+Question - https://practice.geeksforgeeks.org/problems/factorials-of-large-numbers2508/1
+
+--------------------------------------------------------
+Solution- 
+
+class Solution {
+    static ArrayList<Integer> factorial(int N){
+        //code here
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(1);
+        int carry = 0;
+        for(int i=2;i<=N;i++){
+            for(int j=arr.size()-1;j>=0;j--){
+                int prod = i * arr.get(j) + carry;
+                arr.set(j,prod%10);
+                carry = prod/10;
+            }
+            
+            while(carry != 0){
+                arr.add(0,carry%10);
+                carry=carry/10;
+            }
+        }
+        return arr;
+    }
+}
