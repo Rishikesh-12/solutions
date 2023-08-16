@@ -1,0 +1,53 @@
+Question name - Largest BST
+
+Question - https://practice.geeksforgeeks.org/problems/largest-bst/1
+
+--------------------------------------------------------
+Solution- 
+
+class infoNode{
+    boolean isBST;
+    int size, min, max;
+    
+    infoNode(){}
+    
+    infoNode(boolean b, int s, int mi, int ma){
+        isBST = b;
+        size = s;
+        min = mi;
+        max = ma;
+    }
+}
+class Solution{
+    
+    // Return the size of the largest sub-tree which is also a BST
+    static int largestBst(Node root)
+    {
+        // Write your code here
+        return utill(root).size;
+        
+    }
+    
+    static infoNode utill(Node node){
+        if(node == null) return new infoNode(true, 0, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        
+        infoNode left = utill(node.left);
+        infoNode right = utill(node.right);
+        
+        infoNode returnInfoNode = new infoNode();
+        returnInfoNode.isBST = left.isBST && right.isBST && node.data>left.max && node.data<right.min; 
+        returnInfoNode.min = Math.min(node.data, left.min);
+        returnInfoNode.max = Math.max(node.data, right.max);
+
+        if(returnInfoNode.isBST){
+            returnInfoNode.size = left.size + right.size + 1;
+        }
+        else{
+            returnInfoNode.size = Math.max(left.size, right.size);
+        }
+
+        return returnInfoNode;
+
+    }
+    
+}
