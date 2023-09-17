@@ -1,0 +1,36 @@
+Question name - Sort a stack
+
+Question link - https://practice.geeksforgeeks.org/problems/sort-a-stack/1
+------------------------------------------------------------------
+
+Solution - 
+
+class GfG{
+	public Stack<Integer> sort(Stack<Integer> s)
+	{
+		//add code here.
+		if(s.isEmpty()) return s;
+		sortStack(s);
+		return s;
+	}
+	
+	public void sortStack(Stack<Integer> st){
+        if(!st.isEmpty()){
+            int x = st.peek();
+            st.pop();
+            sortStack(st);
+            sortedInsert(st,x);
+        }
+	}
+	
+	public void sortedInsert(Stack<Integer> st, int element){
+	    if(st.isEmpty() || st.peek()<element){
+	        st.push(element);
+	    }
+	    else{
+	        int temp = st.pop();
+	        sortedInsert(st,element);
+	        st.push(temp);
+	    }
+	}
+}

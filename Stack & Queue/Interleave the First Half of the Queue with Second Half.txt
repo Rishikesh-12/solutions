@@ -1,0 +1,48 @@
+Question name - Interleave the First Half of the Queue with Second Half
+
+Question link - https://practice.geeksforgeeks.org/problems/interleave-the-first-half-of-the-queue-with-second-half/1
+------------------------------------------------------------------
+
+Solution - 
+
+class Solution {
+    public static ArrayList<Integer> rearrangeQueue(int N, Queue<Integer> q) {
+        // code here
+        ArrayList<Integer> result = new ArrayList<>();
+        if(N%2 != 0){
+            return new ArrayList<Integer>(q);
+        }
+        
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<N/2;i++){
+            st.push(q.peek());
+            q.poll();
+        }
+        
+         while (!st.empty()) {
+            q.add(st.peek());
+            st.pop();
+        }
+        
+        for(int i=0;i<N/2;i++){
+            q.add(q.peek());
+            q.poll();
+        }
+        
+        for(int i=0;i<N/2;i++){
+            st.push(q.peek());
+            q.poll();
+        }
+        
+        for(int i = 0;i<N/2;i++){
+            result.add(st.peek());
+            st.pop();
+            result.add(q.peek());
+            q.poll();
+        }
+        
+        
+        
+        return result;
+    }
+}

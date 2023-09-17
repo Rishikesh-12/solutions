@@ -1,0 +1,25 @@
+Question name - Stack Permutations
+
+Question link - https://practice.geeksforgeeks.org/problems/stack-permutations/1
+------------------------------------------------------------------
+
+Solution - 
+
+class Solution {
+    public static int isStackPermutation(int n, int[] ip, int[] op) {
+        // code here
+        Stack<Integer> st = new Stack<>();
+        int j=0;
+        
+        for(int i=0; i<n; i++) {
+            st.push(ip[i]);
+            
+            while(!st.isEmpty() && st.peek() == op[j]) {
+                st.pop();
+                j++;
+            }
+        }
+        
+        return (st.isEmpty() && (j == n)) ? 1 : 0;
+    }
+}

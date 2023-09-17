@@ -1,0 +1,51 @@
+Question name - Valid Substring
+
+Question link - https://practice.geeksforgeeks.org/problems/valid-substring0624/1
+------------------------------------------------------------------
+
+Solution - 
+
+class Solution {
+    static int findMaxLen(String s) {
+        // code here
+        int left = 0;
+        int right = 0;
+        
+        int ans = 0;
+        int n = s.length();
+        for(int i=0;i<n;i++){
+            if(s.charAt(i) == '('){
+                left++;
+            }
+            else{
+                right++;
+            }
+            
+            if(left == right) ans = Math.max(ans, 2*right);
+            else if(right > left){
+                right = 0;
+                left = 0;
+            }
+        }
+        
+        left = right = 0;
+        
+        for(int i=n-1;i>=0;i--){
+            if(s.charAt(i) == '('){
+                left++;
+            }
+            else{
+                right++;
+            }
+            
+            if(left == right) ans = Math.max(ans, 2*right);
+            else if(right < left){
+                right = 0;
+                left = 0;
+            }
+        }
+        
+        return ans;
+        
+    }
+}
