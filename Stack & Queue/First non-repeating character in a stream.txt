@@ -1,0 +1,38 @@
+Question name - First non-repeating character in a stream
+
+Question link - https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
+------------------------------------------------------------------
+
+Solution - 
+
+class Solution
+{
+    public String FirstNonRepeating(String A)
+    {
+        // code here
+        int n = A.length();
+        if(n < 2) return A;
+        
+        HashMap<Character, Integer> map = new HashMap<>();
+        Queue<Character> q = new LinkedList<>();
+        StringBuilder result = new StringBuilder();
+        
+        for(int i=0;i<n;i++){
+            Character ch = A.charAt(i);
+            if(!map.containsKey(ch)){
+                q.add(ch);
+            }
+            
+            map.put(ch, map.getOrDefault(ch,0)+1);
+            
+            while(!q.isEmpty() && map.get(q.peek()) > 1){
+                q.poll();
+            }
+            
+            if(q.isEmpty()) result.append("#");
+            else result.append(q.peek());
+            
+        }
+        return result.toString();
+    }
+}
