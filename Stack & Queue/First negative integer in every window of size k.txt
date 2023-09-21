@@ -1,0 +1,31 @@
+Question name - First negative integer in every window of size k.
+
+Question link - https://practice.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
+------------------------------------------------------------------
+
+Solution - 
+
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int k)
+    {
+        long arr[] = new long[N + 1 - k];
+        int idx = 0;
+        int firstNegativeIndex = 0;
+        
+        for(int i = k-1;i<N;i++){
+            
+            while( firstNegativeIndex < i && (firstNegativeIndex <= i-k ||  A[firstNegativeIndex] >= 0 )){
+                firstNegativeIndex++;
+            }
+            
+            if(A[firstNegativeIndex] < 0) arr[idx] = A[firstNegativeIndex];
+            else arr[idx] = 0;
+            
+            idx++;
+        }
+        
+        return arr;
+        
+    }
+}
