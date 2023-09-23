@@ -1,0 +1,46 @@
+Question Name - Reverse a Linked List in groups of given size
+
+Question Link - https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Solution
+{
+    public static Node reverse(Node head, int k)
+    {
+        //Your code here
+        if(head == null || head.next == null) return head;
+        
+        int count = 0;
+        
+        Node dummy = new Node(-1);
+        dummy.next = head;
+        
+        Node prev = dummy, next = dummy, curr = dummy;
+        
+        while(curr != null){
+            count++;
+            curr = curr.next;
+        }
+        
+        while(next != null){
+            curr = prev.next;
+            next = curr.next;
+            
+            int loopLimit = count > k ? k : count-1;
+            
+            for(int i=1; i<loopLimit; i++){
+                curr.next = next.next;
+                next.next = prev.next;
+                prev.next = next;
+                next = curr.next;
+            }
+            
+            prev = curr;
+            count-=k;
+        }
+        return dummy.next;
+    }
+}
