@@ -1,0 +1,31 @@
+Question Name - Remove duplicate element from an unsorted Linked List
+
+Question Link - https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Solution
+{
+    //Function to remove duplicates from unsorted linked list.
+    public Node removeDuplicates(Node head) 
+    {
+         // Your code here
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Node curr = head;
+        Node prev = null;
+    	while(curr != null){
+    	    if(map.containsKey(curr.data)){
+    	        prev.next = curr.next;
+    	        curr = curr.next;
+    	    }
+    	    else{
+    	        map.put(curr.data, curr.data);
+    	        prev = curr;
+    	        curr = curr.next;
+    	    }
+        }
+        return head;
+    }
+}

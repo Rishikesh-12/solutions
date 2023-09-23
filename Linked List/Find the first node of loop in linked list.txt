@@ -1,0 +1,40 @@
+Question Name - Find the first node of loop in linked list
+
+Question Link - https://practice.geeksforgeeks.org/problems/find-the-first-node-of-loop-in-linked-list--170645/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Solution {
+    //Function to find first node if the linked list has a loop.
+    public static int findFirstNode(Node head){
+        //code here
+        Node slow = head;
+        Node fast = head;
+        
+        while(slow != null && fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if(slow == fast){
+                return findFirstNodeUtil(slow, head);
+            }
+        }
+        
+        return -1;
+    }
+    
+    private static int findFirstNodeUtil(Node node, Node head){
+        Node ptr1 = head;
+        Node ptr2 = node;
+        
+        while(ptr1 != ptr2){
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+        
+        return ptr1.data;
+        
+    }
+}

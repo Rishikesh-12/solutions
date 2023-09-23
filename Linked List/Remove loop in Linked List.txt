@@ -1,0 +1,43 @@
+Question Name - Remove loop in Linked List
+
+Question Link - https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Solution {
+
+    public static void removeLoop(Node head){
+        // code here
+        // remove the loop without losing any nodes
+        Node slow = head;
+        Node fast = head;
+        
+        while(slow != null && fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if(slow == fast){
+                removeLoopUtil(slow, head);
+                break;
+            }
+        }
+    }
+    
+    private static void removeLoopUtil(Node node, Node head){
+        Node ptr1 = head;
+        Node ptr2 = node;
+        
+        while(ptr1 != ptr2){
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+        
+        while(ptr2.next != ptr1){
+            ptr2 = ptr2.next;
+        }
+        ptr2.next = null;
+        
+    }
+}
