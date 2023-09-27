@@ -1,0 +1,61 @@
+Question Name - Intersection Point in Y Shaped Linked Lists
+
+Question Link - https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Intersect
+{
+    //Function to find intersection point in Y shaped Linked Lists.
+	int intersectPoint(Node head1, Node head2)
+	{
+	    
+         int len1 = 1;
+         int len2 = 1;
+         Node temp1 = head1;
+         Node temp2 = head2;
+         
+         while(temp1 != null || temp2 != null) {
+             if(temp1 != null) {
+                 temp1 = temp1.next;
+                 len1 += 1;
+             }
+             
+             if(temp2 != null) {
+                 temp2 = temp2.next;
+                 len2 += 1;
+             }
+         }
+         
+         temp1 = head1;
+         temp2 = head2;
+         int lenDiff = Math.abs(len1-len2)+1;
+         if(len1 > len2) {
+             // shift head1 equals to head2
+             int c = 1;
+             while(c < lenDiff) {
+                 temp1 = temp1.next;
+                 c += 1;
+             }
+             
+         } else {
+             // shift head2 equals to head1;
+             int c = 1;
+             while(c < lenDiff) {
+                 temp2 = temp2.next;
+                 c += 1;
+             }
+         }
+         
+         // move to pointer one step
+         while(temp1 != null && temp2 != null) {
+             if(temp1 == temp2) return temp1.data;
+             temp1 = temp1.next;
+             temp2 = temp2.next;
+         }
+         
+         return -1;
+	}
+}
