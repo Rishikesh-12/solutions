@@ -1,0 +1,54 @@
+Question Name - Merge Sort for Linked List
+
+Question Link - https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class Solution
+{
+    //Function to sort the given linked list using Merge Sort.
+    static Node mergeSort(Node head)
+    {
+        // add your code here
+        if(head == null || head.next == null) return head;
+        
+        Node middleElement = getMiddleElement(head);
+        Node nextElement = middleElement.next;
+        middleElement.next = null;
+        
+        Node left = mergeSort(head);
+        Node right = mergeSort(nextElement);
+        
+        Node head2 = merge(left, right);
+        
+        return head2;
+    }
+    
+    static Node getMiddleElement(Node head){
+        Node slow =head, fast = head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        
+        return slow;
+    }
+    
+    static Node merge(Node a, Node b){
+        Node head = null;
+        if(a == null) return b;
+        if(b == null) return a;
+        
+        if(a.data <= b.data){
+            head = a;
+            head.next = merge(a.next, b);
+        }
+        else{
+            head = b;
+            head.next = merge(a,b.next);
+        }
+        return head;
+    }
+}

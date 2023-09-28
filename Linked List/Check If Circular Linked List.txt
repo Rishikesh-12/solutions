@@ -1,0 +1,21 @@
+Question Name - Check If Circular Linked List
+
+Question Link - https://practice.geeksforgeeks.org/problems/circular-linked-list/1
+
+----------------------------------------------------------------------------------------
+
+Solution -
+
+class GfG
+{
+    boolean isCircular(Node head)
+    {
+	// Your code here
+	    Node curr = head;
+	    while(curr != null){
+	        curr = curr.next;
+	        if(curr == head) return true;
+	    }
+	    return false;
+    }
+}

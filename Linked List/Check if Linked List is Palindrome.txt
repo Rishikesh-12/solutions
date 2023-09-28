@@ -1,0 +1,44 @@
+Question Name - Check if Linked List is Palindrome
+
+Question Link - https://practice.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1
+-----------------------------------------------------------------------------------------------------------------
+
+Solution - 
+
+class Solution
+{
+    //Function to check whether the list is palindrome.
+    boolean isPalindrome(Node head) 
+    {
+        if (head == null || head.next == null) {
+            return true; 
+        }
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node secondHalf = reverse(slow);
+        
+        Node firstHalf = head;
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data) {
+                return false; 
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+        
+        return true; 
+    }
+    private Node reverse(Node head) {
+        Node prev = null, current = head, nextNode;
+        while (current != null) {
+            nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        return prev;
+    }
+}
