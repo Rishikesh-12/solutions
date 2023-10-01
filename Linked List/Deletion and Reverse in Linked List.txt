@@ -1,0 +1,61 @@
+Question Name - Deletion and Reverse in Linked List
+
+Question Link - https://practice.geeksforgeeks.org/problems/deletion-and-reverse-in-linked-list/1
+-----------------------------------------------------------------------------------------------------------------
+
+Solution - 
+
+class GFG
+{
+    //This method returns the head of the LL after deleting node with value d.
+    public static Node deleteNode(Node head,int d)
+    {
+        //Add your code here.
+        
+        if(head == null || head.next == null) return head;
+        
+        if(head.data == d){
+            Node curr = head;
+            while(curr.next != head){
+                curr = curr.next;
+            }
+            curr.next = head.next;
+            head = head.next;
+            
+            return head;
+        }
+        
+        Node curr = head;
+        Node prev = null;
+        while(curr.data != d){
+            prev = curr;
+            curr = curr.next;
+        }
+        prev.next = curr.next;
+        return head;
+    }
+    //This method returns the head node of the reversed Linked list.
+    public static Node reverse(Node head)
+    {
+        //Add your code here
+        if(head == null || head.next == null)
+            return head;
+            
+        Node prev = null;
+        Node current = head;
+        Node next;
+        do {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        } while (current != (head));
+ 
+        // adjusting the links so as to make the
+        // last node point to the first node
+        head.next = prev;
+        head = prev;
+        return head;
+    }
+    
+}

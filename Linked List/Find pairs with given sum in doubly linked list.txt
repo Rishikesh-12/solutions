@@ -1,0 +1,39 @@
+Question Name - Find pairs with given sum in doubly linked list
+
+Question Link - https://practice.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1
+-----------------------------------------------------------------------------------------------------------------
+
+Solution - 
+
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        // code here
+        
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        
+        if(head == null || head.next == null) return result;
+        Node ptr1 = head, ptr2 = head;
+        while(ptr2.next != null){
+            ptr2 = ptr2.next;
+        }
+        
+        while(ptr1 != ptr2 && ptr2.next != ptr1){
+            int data = ptr1.data + ptr2.data;
+            if(data == target) {
+                ArrayList<Integer> arr = new ArrayList<Integer>();
+                arr.add(ptr1.data);
+                arr.add(ptr2.data);
+                result.add(arr);
+                ptr1 = ptr1.next;
+                ptr2 = ptr2.prev;
+            }
+            else if(data>target){
+                ptr2 = ptr2.prev;
+            }
+            else{
+                ptr1 = ptr1.next;
+            }
+        }
+        return result;
+    }
+}
