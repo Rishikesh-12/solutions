@@ -1,0 +1,54 @@
+Question Name - Delete nodes having greater value on right
+
+Question Link - https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1
+-----------------------------------------------------------------------------------------------------------------
+
+Solution - 
+
+class Solution
+{
+    Node compute(Node head)
+    {
+        // your code here
+        head = reverse(head);
+        
+        Node current = head;
+ 
+        Node maxnode = head;
+        // Node temp;
+ 
+        while (current != null && current.next != null) {
+            /* If current is smaller than max, then delete
+               current */
+            if (current.next.data < maxnode.data) {
+                // temp = current.next;
+                current.next = current.next.next;
+                // temp = null;
+            }
+ 
+            /* If current is greater than max, then update
+               max and move current */
+            else {
+                current = current.next;
+                maxnode = current;
+            }
+        }
+        
+        return reverse(head);
+    }
+    
+    Node reverse( Node head){
+        Node prev = null;
+        Node next = null;
+        Node curr = head;
+        
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        return prev;
+    }
+}

@@ -1,0 +1,46 @@
+Question Name - Merge K sorted linked lists
+
+Question Link - https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    //Function to merge K sorted linked list.
+    Node mergeKList(Node[]arr,int K)
+    {
+        //Add your code here.
+        K=K-1;
+        while(K>0){
+            int i = 0;
+            int j = K;
+            while(i<j){
+                arr[i] = sortMerge(arr[i],arr[j]);
+                i++;
+                j--;
+                
+                if(i>= j)
+                    K=j;
+            }
+        }
+        
+        return arr[0];
+        
+    }
+    
+    Node sortMerge(Node a, Node b){
+        if(a == null) return b;
+        if(b == null) return a;
+        
+        Node result = null;
+        if(a.data <= b.data){
+            result = a;
+            result.next = sortMerge(a.next, b);
+        }
+        else{
+            result = b;
+            result.next = sortMerge(a, b.next);
+        }
+        
+        return result;
+    }
+}
