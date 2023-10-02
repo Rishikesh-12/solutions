@@ -1,0 +1,52 @@
+Question Name - Segregate even and odd nodes in a Link List
+
+Question Link - https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list5035/1
+-----------------------------------------------------------------------------------------------------------------
+
+Solution - 
+
+class Solution{
+    Node divide(int N, Node head){
+        // code here
+        Node evenHead = null;
+        Node oddHead = null;
+        Node evenTail = null;
+        Node oddTail = null;
+        
+        Node curr = head;
+        
+        while(curr != null){
+            if(curr.data%2 == 0){
+                if(evenHead == null){
+                    evenHead = curr;
+                    evenTail = curr;
+                }
+                else{
+                    evenTail.next = curr;
+                    evenTail = evenTail.next;
+                }
+            }
+            else{
+                if(oddHead == null){
+                    oddHead = curr;
+                    oddTail = curr;
+                }
+                else{
+                    oddTail.next = curr;
+                    oddTail = oddTail.next;
+                }
+            }
+            curr = curr.next;
+        }
+        
+        
+        if(evenTail != null) {
+            evenTail.next = oddHead;
+        }
+        if(oddTail != null){
+            oddTail.next = null;
+        }
+        if(evenHead == null) return oddHead;
+        return evenHead;
+    }
+}
