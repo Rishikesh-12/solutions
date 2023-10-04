@@ -1,0 +1,48 @@
+Question Name - Clone a linked list with next and random pointer
+
+Question Link - https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Clone {
+    //Function to clone a linked list with next and random pointer.
+    Node copyList(Node head) {
+        // your code here
+        if (head == null) {
+            return null;
+        }
+        
+        Node curr = head;
+        
+        while(curr != null){
+            Node newNode = new Node(curr.data);
+            newNode.next = curr.next;
+            curr.next = newNode;
+            curr = newNode.next;
+        }
+        
+        curr = head;
+        while(curr != null){
+            if (curr.arb != null) {
+                curr.next.arb = curr.arb.next;
+            }
+            curr = curr.next.next;
+        }
+        
+        curr = head;
+        Node newHead = head.next;
+        Node newCurr = newHead;
+        
+        while(newCurr.next != null){
+            curr.next = curr.next.next;
+            newCurr.next = newCurr.next.next;
+            curr = curr.next;
+            newCurr = newCurr.next;
+        }
+        
+        curr.next = null;
+        newCurr.next = null;
+        
+        return newHead;
+        
+    }
+}
