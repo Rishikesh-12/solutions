@@ -1,0 +1,43 @@
+Question Name - Merge two binary Max heaps
+
+Question Link - https://practice.geeksforgeeks.org/problems/merge-two-binary-max-heap0144/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Solution{
+    public int[] mergeHeaps(int[] a, int[] b, int n, int m) {
+        // your code here
+        int[] result = new int[n+m];
+        int k=0;
+        
+        for(int i=0; i<n; i++){
+            result[k++]=a[i];
+        }
+        
+        for(int i=0; i<m; i++){
+            result[k++]=b[i];
+        }
+        
+        int len = n+m;
+        
+        for(int i=len/2; i>=0 ; i--){
+            heapify(result, n+m, i);
+        }
+        return result;
+    }
+    
+    private void heapify(int[] arr, int n, int i){
+        int largest = i;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        
+        if(l<n && arr[l] > arr[largest]) largest = l;
+        if(r<n && arr[r] > arr[largest]) largest = r;
+        
+        if(largest != i){
+            int temp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = temp;
+            heapify(arr,n,largest);
+        }
+    }
+}

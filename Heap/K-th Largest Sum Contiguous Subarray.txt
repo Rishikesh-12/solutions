@@ -1,0 +1,34 @@
+Question Name - K-th Largest Sum Contiguous Subarray
+
+Question Link - https://practice.geeksforgeeks.org/problems/k-th-largest-sum-contiguous-subarray/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Solution {
+    public static int kthLargest(int N, int K, int[] Arr) {
+        // code here
+        
+        int[] sum =  new int[N+1];
+        sum[0] = 0;
+        sum[1] = Arr[0];
+        
+        for(int i=2;i<=N;i++){
+            sum[i] = sum[i-1]+Arr[i-1];
+        }
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        
+        for(int i=1;i<=N;i++){
+            for(int j=i;j<=N;j++){
+                int x = sum[j] - sum[i-1];
+                
+                if(pq.size()<K) pq.add(x);
+                else if(pq.peek() < x){
+                    pq.poll();
+                    pq.add(x);
+                }
+            }
+        }
+        
+        return pq.peek();
+    }
+}
