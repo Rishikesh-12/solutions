@@ -1,0 +1,77 @@
+Question Name - Is Binary Tree Heap
+
+Question Link - https://practice.geeksforgeeks.org/problems/is-binary-tree-heap/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Solution {
+    boolean isHeap(Node tree) {
+        // code here
+        
+        boolean result = true;
+        
+        // check if child is greater than parent
+        
+        if (tree != null && (tree.left != null 
+            && tree.left.data > tree.data) 
+            || (tree.right != null && tree.right.data > tree.data)) {
+            return false;
+        }
+        
+        // check if left subtree has children but right is
+        // null
+ 
+        if (tree.left != null) {
+            if ((tree.left.left != null
+                 || tree.left.right != null)
+                && tree.right == null) {
+                return false;
+            }
+        }
+ 
+        // check if right subtree has children and left is
+        // null
+ 
+        if (tree.right != null) {
+            if ((tree.right.left != null
+                 || tree.right.right != null)
+                && tree.left == null) {
+                return false;
+            }
+        }
+ 
+        // check if right subtre has children but not left
+        // subtree
+ 
+        if (tree.left != null) {
+            if (tree.left.left == null
+                && tree.left.right == null) {
+                if (tree.right != null) {
+                    if (tree.right.left != null
+                        || tree.right.right != null) {
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        // recursively call for left and right subtree
+ 
+        if (tree != null && tree.left != null) {
+            boolean l = isHeap(tree.left);
+            result = result & l;
+        }
+        if (tree != null && tree.right != null) {
+            boolean r = isHeap(tree.right);
+            result = result & r;
+        }
+        
+        return result;
+    }
+}
+
+
+// Set the initial result to true as if it does not child than it is a heap
+// First check if the child is greater than parent, if so return false
+// Than check if the left child is null and right child has children or vice-versa, if so return false
+// Than check if the left child doesn’t have children but right child have children, if so return false
+// Than recursively call for left and right child and return AND of result of subtrees
