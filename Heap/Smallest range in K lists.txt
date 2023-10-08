@@ -1,0 +1,61 @@
+Question Name - Smallest range in K lists
+
+Question Link - https://practice.geeksforgeeks.org/problems/find-smallest-range-containing-elements-from-k-lists/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Node{
+    int data;
+    int row;
+    int column;
+    
+    Node(int data, int r, int c){
+        this.data = data;
+        this.row = r;
+        this.column = c;
+    }
+}
+
+class Solution
+{
+	static int[] findSmallestRange(int[][] arr,int n,int k)
+	{
+	    //add your code here
+	    PriorityQueue<Node> pq = new PriorityQueue<>((a,b)-> (a.data-b.data));
+	    int max = Integer.MIN_VALUE;
+	    int range = Integer.MAX_VALUE;
+	    for(int i=0;i<k;i++){
+	        pq.add(new Node(arr[i][0], i, 0));
+	        max = Math.max(max, arr[i][0]);
+	    }
+	    
+	    
+	    int start=-1;
+	    int end=-1;
+	    
+	    while(!pq.isEmpty()){
+	        Node n1 = pq.peek();
+	        pq.poll();
+	        int min = n1.data;
+	        if(max - min < range){
+	            range = max-min;
+	            start = min;
+	            end = max;
+	        }
+	        
+	        if (n1.column + 1 < n) {
+	            max = Math.max(max, arr[n1.row][n1.column+1]);
+	            pq.add(new Node(arr[n1.row][n1.column+1], n1.row, n1.column+1));
+	        }
+	        else
+                break;
+	    }
+	    
+	    int[] res = new int[2];
+	    res[0]=start;
+	    res[1]=end;
+	    
+	    return res;
+	    
+	    
+	}
+}

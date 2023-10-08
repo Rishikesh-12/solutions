@@ -1,0 +1,32 @@
+Question Name - BST to max heap
+
+Question Link - https://practice.geeksforgeeks.org/problems/bst-to-max-heap/1
+-----------------------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    static int index;
+    public static void convertToMaxHeapUtil(Node root)
+    {
+        //code here
+        ArrayList<Integer> arr = new ArrayList<>();
+        inorder(arr,root);
+        index=0;
+        preorder(arr, root);
+    }
+    
+    static void inorder(ArrayList<Integer> arr, Node node){
+        if(node == null) return;
+        
+        inorder(arr,node.right);
+        arr.add(node.data);
+        inorder(arr,node.left);
+    }
+    
+    static void preorder(ArrayList<Integer> arr, Node node){
+        if(node == null) return;
+        node.data = arr.get(index++);
+        preorder(arr, node.right);
+        preorder(arr, node.left);
+    }
+}
