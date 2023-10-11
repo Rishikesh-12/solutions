@@ -1,38 +1,38 @@
-Question Link - https://practice.geeksforgeeks.org/problems/majority-element/0#
+Question name - Majority Element
+
+Question Link - https://practice.geeksforgeeks.org/problems/majority-element-1587115620/1
 
 ---------------------------------------
-Solution - 
-#include<bits/stdc++.h>
-using namespace std;
 
-int majority(int arr[], int n){
-    int countarr[10]={0};
-    for (int i=0;i<n;i++){
-        countarr[arr[i]]++;
-    }
-    int maj=-1;
-    for(int i=0;i<10;i++){
-        if(countarr[i]>n/2){
-            maj=i;
+class Solution
+{
+    static int majorityElement(int a[], int size)
+    {
+        // your code here
+        
+        
+        //moore voting algo
+        int element=-1;
+        int count =0;
+        for(int i=0;i<size;i++){
+            if(count == 0){
+                count = 1;
+                element = a[i];
+            }
+            else if(a[i]==element){
+                count++;
+            }
+            else{
+                count--;
+            }
         }
+        count = 0 ;
+        for(int i=0;i<size;i++){
+            if(a[i]==element) count++;
+        }
+        
+        if(count>size/2) return element;
+        
+        return -1;
     }
-    return maj;
-}
-
-
-int main()
- {
- 	int t;
-    cin>>t;
-    while(t--){
-    int n;
-    cin>>n;
-	int arr[n];
-	for(int i=0;i<n;i++){
-	    cin>>arr[i];
-	}
-	cout<<majority(arr,n)<<endl;
-    }
-    return 0;
-}
 }
