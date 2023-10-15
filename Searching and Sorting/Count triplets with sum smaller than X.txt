@@ -1,0 +1,33 @@
+Question name - Count triplets with sum smaller than X
+
+Question link - https://practice.geeksforgeeks.org/problems/count-triplets-with-sum-smaller-than-x5549/1
+
+------------------------------------------------------------ 
+Solution - 
+
+class Solution
+{
+    long countTriplets(long arr[], int n,int sum)
+    {
+        // code here
+        int count = 0;
+        Arrays.sort(arr);
+        for (int i = 0; i < n; i++) {
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                long currSum = arr[i] + arr[j] + arr[k];
+
+                if (currSum < sum) {
+                    count+=(k-j); //because agar curSum chota hai arr[k] ko include karne pe th iska matlab
+                    // use pehle ke intex ke elements lene se bhi curr sum ki value small aayegi because our array is sorted.
+                    j++;
+                } else {
+                    k--;
+                }
+            }
+        }
+        return count;
+    }
+}

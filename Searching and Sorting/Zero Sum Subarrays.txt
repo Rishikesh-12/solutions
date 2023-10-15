@@ -1,0 +1,33 @@
+Question name - Zero Sum Subarrays
+
+Question link - https://practice.geeksforgeeks.org/problems/zero-sum-subarrays1825/1
+
+------------------------------------------------------------ 
+Solution - 
+
+class Solution{
+    //Function to count subarrays with sum equal to 0.
+    public static long findSubarray(long[] arr ,int n) 
+    {
+        //Your code here
+        Map<Long, Integer> sumIndexMap = new HashMap<>();
+        sumIndexMap.put(0l,1);
+        
+        long count=0l;
+        long sum = 0l;
+        
+        for (int i = 0; i <n; i++) 
+        {
+            sum += arr[i];
+            if(sumIndexMap.containsKey(sum)){
+                count+=sumIndexMap.get(sum);
+                sumIndexMap.put(sum,sumIndexMap.get(sum)+1);
+            }
+            else{
+                sumIndexMap.put(sum,1);
+            }
+            
+        }
+        return count;
+    }
+}

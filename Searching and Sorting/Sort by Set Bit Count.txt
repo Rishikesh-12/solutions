@@ -1,0 +1,28 @@
+Question name - Sort by Set Bit Count
+
+Question link - https://practice.geeksforgeeks.org/problems/sort-by-set-bit-count1153/1
+
+------------------------------------------------------------ 
+Solution - 
+
+class Compute  
+{ 
+    
+    static void sortBySetBitCount(Integer arr[], int n)
+    { 
+        // Your code goes here
+          Arrays.sort(arr,(a,b)->{
+                int countA=Integer.bitCount(a);
+                int countB=Integer.bitCount(b);
+                if(countA<countB){
+                    return 1;
+                }
+                else if(countA>countB){
+                    return -1;
+                }
+                else{
+                    return 0;
+                }
+          });
+    } 
+}
